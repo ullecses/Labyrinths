@@ -1,0 +1,23 @@
+# Структура проекта
+
+## Пакет: `backend.academy.generators`
+
+### 1. Интерфейс: `Generator`
+- **Описание**: Определяет методы для генерации лабиринтов.
+- **Методы**:
+  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`
+
+### 2. Класс: `GrowingTreeMazeGenerator`
+- **Описание**: Генерирует лабиринт с использованием алгоритма растущего дерева.
+- **Методы**:
+  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`
+  - `Coordinate selectCell(List<Coordinate> cells)`
+  - `Coordinate getCellBetween(Coordinate current, Coordinate next)`
+- **Алгоритм**: Начинает с добавления стартовой клетки и создает проходы до тех пор, пока есть доступные клетки.
+
+### 3. Класс: `KruskalMazeGenerator`
+- **Описание**: Генерирует лабиринт с использованием алгоритма Краскала.
+- **Методы**:
+  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`
+  - `int coordinateToIndex(Coordinate coord, int width)`
+- **Алгоритм**: Создает случайные рёбра и соединяет клетки, избегая циклов, используя структуру данных "составные множества".
