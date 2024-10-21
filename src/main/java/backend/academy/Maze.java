@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maze {
+    private static final double CONST_FOR_SAND = 0.08;
+    private static final double CONST_FOR_COIN = 0.07;
+    private static final int OFFSET = 2;
     private final int width;
     private final int height;
     private final Cell[][] grid;
@@ -22,7 +25,7 @@ public class Maze {
     }
 
     public boolean isPassage(int row, int col) {
-        return grid[row][col].getType() != Cell.Type.WALL;
+        return grid[row][col].isPassage();
     }
 
     public Cell.Type getType(Coordinate coord) {
@@ -47,19 +50,6 @@ public class Maze {
         grid[coord.row()][coord.col()].setType(type);
     }
 
-    public void printMaze() {
-        for (int row = 0; row < height; row++) {
-            for (int col = 0; col < width; col++) {
-                if (grid[row][col].getType() == Cell.Type.PASSAGE) {
-                    // Назначение типа поверхности
-                    assignSurface(row, col);
-                }
-                System.out.print(grid[row][col].getDisplaySymbol());
-            }
-            System.out.println();
-        }
-    }
-
     public void addSurfaces() {
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
@@ -72,9 +62,9 @@ public class Maze {
     }
 
     private void assignSurface(int row, int col) {
-        if (Math.random() < 0.08) {
+        if (Math.random() < CONST_FOR_SAND) {
             grid[row][col].setType(Cell.Type.SAND);
-        } else if (Math.random() < 0.07) {
+        } else if (Math.random() < CONST_FOR_COIN) {
             grid[row][col].setType(Cell.Type.COIN);
         }
     }
@@ -85,10 +75,10 @@ public class Maze {
 
         // Массив с направлениями движения (вверх, вниз, влево, вправо)
         int[][] directions = {
-            {-2, 0}, // вверх на 2 клетки
-            {2, 0},  // вниз на 2 клетки
-            {0, -2}, // влево на 2 клетки
-            {0, 2}   // вправо на 2 клетки
+            {-OFFSET, 0}, // вверх на 2 клетки
+            {OFFSET, 0},  // вниз на 2 клетки
+            {0, -OFFSET}, // влево на 2 клетки
+            {0, OFFSET}   // вправо на 2 клетки
         };
 
         // Проходим по каждому направлению

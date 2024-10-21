@@ -28,26 +28,7 @@ public class Cell {
         PATH,
     }
 
-    public String getDisplaySymbol() {
-        switch (type) {
-            case WALL:
-                displaySymbol = "⬜";  // Символ для стены
-                break;
-            case PASSAGE:
-                displaySymbol = "⬛️";  // Символ для прохода
-                break;
-            case COIN:
-                displaySymbol = "\uD83D\uDFE1";  // Символ для монетки (учучшающая поверхность)
-                break;
-            case SAND:
-                displaySymbol = "\uD83D\uDFEB";  // Символ для песка (ухудшающая поверхность)
-                break;
-            case PATH:
-                displaySymbol = "\uD83D\uDD33";  // Символ для песка (ухудшающая поверхность)
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown cell type: " + type);
-        }
-        return displaySymbol;
+    public boolean isPassage() {
+        return this.type != Type.WALL;
     }
 }

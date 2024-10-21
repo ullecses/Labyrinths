@@ -1,13 +1,20 @@
-package backend.academy;
+package backend.academy.generators;
 
-import java.util.*;
+import backend.academy.Cell;
+import backend.academy.Coordinate;
+import backend.academy.Maze;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class KruskalMazeGenerator implements Generator {
 
     // Метод для генерации лабиринта с помощью алгоритма Краскала
     @Override
-    public Maze generate(int height, int width, Coordinate start, Coordinate end) {
-        Maze maze = new Maze(height, width);
+    public Maze generate(Maze maze, Coordinate start, Coordinate end) {
+        int height = maze.getHeight();
+        int width = maze.getWidth();
+
         List<Edge> edges = new ArrayList<>();
         DisjointSet disjointSet = new DisjointSet(width * height);
 
@@ -80,7 +87,7 @@ public class KruskalMazeGenerator implements Generator {
         private final int[] parent;
         private final int[] rank;
 
-        public DisjointSet(int size) {
+        DisjointSet(int size) {
             parent = new int[size];
             rank = new int[size];
             for (int i = 0; i < size; i++) {

@@ -1,10 +1,13 @@
-package backend.academy;
+package backend.academy.generators;
 
+import backend.academy.Cell;
+import backend.academy.Coordinate;
+import backend.academy.Maze;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class GrowingTreeMazeGenerator implements Generator{
+public class GrowingTreeMazeGenerator implements Generator {
     private final SelectionStrategy strategy;
 
     public GrowingTreeMazeGenerator() {
@@ -12,8 +15,9 @@ public class GrowingTreeMazeGenerator implements Generator{
     }
 
     @Override
-    public Maze generate(int height, int width, Coordinate start, Coordinate end) {
-        Maze maze = new Maze(height, width);
+    public Maze generate(Maze maze, Coordinate start, Coordinate end) {
+        int height = maze.getHeight();
+        int width = maze.getWidth();
         List<Coordinate> cells = new ArrayList<>();
 
         // Добавляем стартовую ячейку
@@ -50,7 +54,8 @@ public class GrowingTreeMazeGenerator implements Generator{
 
     // Метод для выбора ячейки
     private Coordinate selectCell(List<Coordinate> cells) {
-        return strategy == SelectionStrategy.LAST ? cells.get(cells.size() - 1) : cells.get(new Random().nextInt(cells.size()));
+        return strategy == SelectionStrategy.LAST ? cells.get(cells.size() - 1)
+            : cells.get(new Random().nextInt(cells.size()));
     }
 
     // Метод для получения клетки между двумя клетками

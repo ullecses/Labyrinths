@@ -1,6 +1,16 @@
-package backend.academy;
+package backend.academy.solvers;
 
-import java.util.*;
+import backend.academy.Cell;
+import backend.academy.Coordinate;
+import backend.academy.Maze;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 
 public class AStarSolver implements Solver {
 
@@ -104,7 +114,7 @@ public class AStarSolver implements Solver {
         int g; // Текущая стоимость пути g(x)
         int f; // Общая стоимость f(x) = g(x) + h(x)
 
-        public Node(Coordinate coord, int g, int f) {
+        Node(Coordinate coord, int g, int f) {
             this.coord = coord;
             this.g = g;
             this.f = f;
