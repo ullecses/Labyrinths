@@ -6,12 +6,12 @@ import java.io.IOException;
 import java.util.List;
 
 public class MazeApplication {
-    private final IOHandler ioHandler;
     private final MazeManager mazeManager;
+    private final IOHandler ioHandler;
 
-    public MazeApplication(IOHandler ioHandler) {
+    public MazeApplication(IOHandler ioHandler, MazeManager mazeManager) {
         this.ioHandler = ioHandler;
-        this.mazeManager = new MazeManager(ioHandler);
+        this.mazeManager = mazeManager;
     }
 
     public void run() throws IOException {

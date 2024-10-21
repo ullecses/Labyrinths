@@ -12,9 +12,9 @@ public class MazeManager {
     public static final Coordinate SMALL_MAZE = new Coordinate(17, 31);
     public static final Coordinate MEDIUM_MAZE = new Coordinate(25, 45);
     public static final Coordinate LARGE_MAZE = new Coordinate(35, 65);
-    private static final int SMALL_MAZE_ID = 1;
-    private static final int MEDIUM_MAZE_ID = 2;
-    private static final int LARGE_MAZE_ID = 3;
+    public static final int SMALL_MAZE_ID = 1;
+    public static final int MEDIUM_MAZE_ID = 2;
+    public static final int LARGE_MAZE_ID = 3;
     private static final String INPUT_NULL = "Вы не ввели значение. Пожалуйста, попробуйте снова.";
     private static final String INPUT_INCORRECT = "Неверный выбор. Повторите.";
     private static final String INPUT_NEED_1_OR_2 = "Неверный ввод. Пожалуйста, введите число от 1 до 2.";
