@@ -1,23 +1,84 @@
 # Структура проекта
 
-## Пакет: `backend.academy.generators`
+## Пакет: `backend.academy`
 
-### 1. Интерфейс: `Generator`
+### 1. Класс: `Cell`
+- **Описание**: Моделирует клетку в лабиринте, имеет тип и позицию.
+- **Методы**:
+  - `Type getType()`: Возвращает тип клетки.
+  - `void setType(Type type)`: Устанавливает тип клетки.
+  - `boolean isPassage()`: Проверяет, является ли клетка проходом.
+
+### 2. Класс: `Coordinate`
+- **Описание**: Представляет координаты клетки в лабиринте с индексами строки и столбца.
+
+### 3. Класс: `IOHandler`
+- **Описание**: Обрабатывает ввод и вывод данных для приложения.
+- **Методы**:
+  - `String readLine()`: Читает строку ввода от пользователя.
+  - `void write(String message)`: Печатает сообщение без переноса строки.
+  - `void writeLine(String message)`: Печатает сообщение с переносом строки.
+
+### 4. Класс: `Main`
+- **Описание**: Главный класс приложения, инициализирует и запускает процесс генерации лабиринта.
+- **Методы**:
+  - `public static void main(String[] args)`: Точка входа в приложение.
+
+### 5. Класс: `Maze`
+- **Описание**: Представляет лабиринт, состоящий из клеток и их типов.
+- **Методы**:
+  - `boolean isPassage(int row, int col)`: Проверяет, является ли указанная клетка проходом.
+  - `Cell.Type getType(Coordinate coord)`: Получает тип клетки по координатам.
+  - `void setCellType(Coordinate coord, Cell.Type type)`: Устанавливает тип клетки по координатам.
+  - `void addSurfaces()`: Добавляет поверхности к проходам в лабиринте.
+  - `List<Coordinate> getUnvisitedNeighbors(Coordinate coord)`: Получает непосещенные соседние клетки.
+
+
+### Пакет: `backend.academy.generators`
+
+#### 1. Интерфейс: `Generator`
 - **Описание**: Определяет методы для генерации лабиринтов.
 - **Методы**:
-  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`
+  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`: Генерирует лабиринт, используя указанные начальные и конечные координаты.
 
-### 2. Класс: `GrowingTreeMazeGenerator`
+#### 2. Класс: `GrowingTreeMazeGenerator`
 - **Описание**: Генерирует лабиринт с использованием алгоритма растущего дерева.
 - **Методы**:
-  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`
-  - `Coordinate selectCell(List<Coordinate> cells)`
-  - `Coordinate getCellBetween(Coordinate current, Coordinate next)`
+  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`: Генерирует лабиринт, начиная с заданной стартовой клетки и создавая проходы.
+  - `Coordinate selectCell(List<Coordinate> cells)`: Выбирает случайную клетку из списка доступных клеток для добавления в лабиринт.
+  - `Coordinate getCellBetween(Coordinate current, Coordinate next)`: Возвращает координаты клетки, находящейся между текущей и следующей клетками.
 - **Алгоритм**: Начинает с добавления стартовой клетки и создает проходы до тех пор, пока есть доступные клетки.
 
-### 3. Класс: `KruskalMazeGenerator`
+#### 3. Класс: `KruskalMazeGenerator`
 - **Описание**: Генерирует лабиринт с использованием алгоритма Краскала.
 - **Методы**:
-  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`
-  - `int coordinateToIndex(Coordinate coord, int width)`
+  - `Maze generate(Maze maze, Coordinate start, Coordinate end)`: Генерирует лабиринт, соединяя клетки случайными рёбрами.
+  - `int coordinateToIndex(Coordinate coord, int width)`: Преобразует координаты клетки в индекс для доступа в массиве.
 - **Алгоритм**: Создает случайные рёбра и соединяет клетки, избегая циклов, используя структуру данных "составные множества".
+
+### Пакет: `backend.academy.solvers`
+
+#### 1. Интерфейс: `Solver`
+- **Описание**: Определяет методы для решения лабиринтов.
+- **Методы**:
+  - `List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end)`: Находит кратчайший путь в лабиринте от стартовой до конечной клетки.
+
+#### 2. Класс: `AStarSolver`
+- **Описание**: Реализует алгоритм A* для нахождения кратчайшего пути в лабиринте.
+- **Методы**:
+  - `List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end)`: Выполняет алгоритм A* для нахождения пути.
+  - `private int heuristic(Coordinate a, Coordinate b)`: Вычисляет эвристическую оценку расстояния между двумя клетками.
+  - `private int getCellCost(Maze maze, Coordinate coord)`: Возвращает стоимость посещения указанной клетки.
+- **Алгоритм**: Использует приоритетную очередь и эвристическую функцию для оценки расстояния до цели.
+
+#### 3. Класс: `ShortestPathFinder`
+- **Описание**: Реализует алгоритм поиска в ширину (BFS) для нахождения кратчайшего пути в лабиринте.
+- **Методы**:
+  - `List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end)`: Находит кратчайший путь, используя алгоритм BFS.
+  - `private int getCellCost(Maze maze, Coordinate coord)`: Возвращает стоимость посещения указанной клетки.
+- **Алгоритм**: Обрабатывает клетки по уровням, пока не достигнет цели.
+
+#### 4. Класс: `SolverUtils`
+- **Описание**: Утилитарный класс для работы с соседними клетками.
+- **Методы**:
+  - `public static List<Coordinate> getNeighbors(Maze maze, Coordinate coord)`: Возвращает список соседних клеток для заданной клетки.
