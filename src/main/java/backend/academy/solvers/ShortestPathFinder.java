@@ -41,7 +41,7 @@ public class ShortestPathFinder implements Solver {
             }
 
             // Проходим по всем соседям
-            for (Coordinate neighbor : getNeighbors(maze, current)) {
+            for (Coordinate neighbor : SolverUtils.getNeighbors(maze, current)) {
                 int newDistance = currentDistance + getCellCost(maze, neighbor);
 
                 if (newDistance < distances[neighbor.row()][neighbor.col()]) {
@@ -64,22 +64,6 @@ public class ShortestPathFinder implements Solver {
         Collections.reverse(path); // Разворачиваем путь, так как мы шли от конца
 
         return path; // Возвращаем список клеток, образующих кратчайший путь
-    }
-
-    private List<Coordinate> getNeighbors(Maze maze, Coordinate coord) {
-        List<Coordinate> neighbors = new ArrayList<>();
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Вверх, вниз, влево, вправо
-
-        for (int[] direction : directions) {
-            int newRow = coord.row() + direction[0];
-            int newCol = coord.col() + direction[1];
-
-            if (maze.isInBounds(newRow, newCol) && maze.isPassage(newRow, newCol)) {
-                neighbors.add(new Coordinate(newRow, newCol));
-            }
-        }
-
-        return neighbors;
     }
 
     private int getCellCost(Maze maze, Coordinate coord) {

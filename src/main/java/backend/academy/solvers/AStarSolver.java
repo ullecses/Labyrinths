@@ -44,7 +44,7 @@ public class AStarSolver implements Solver {
             }
 
             // Обработка всех соседей
-            for (Coordinate neighbor : getNeighbors(maze, currentCoord)) {
+            for (Coordinate neighbor : SolverUtils.getNeighbors(maze, currentCoord)) {
                 int tentativeGScore = gScore.get(currentCoord) + getCellCost(maze, neighbor);
 
                 if (tentativeGScore < gScore.getOrDefault(neighbor, Integer.MAX_VALUE)) {
@@ -71,23 +71,6 @@ public class AStarSolver implements Solver {
         Collections.reverse(path); // Разворачиваем путь, так как он был восстановлен от конца
 
         return path;
-    }
-
-    // Метод для получения соседей клетки
-    private List<Coordinate> getNeighbors(Maze maze, Coordinate coord) {
-        List<Coordinate> neighbors = new ArrayList<>();
-        int[][] directions = {{-1, 0}, {1, 0}, {0, -1}, {0, 1}}; // Вверх, вниз, влево, вправо
-
-        for (int[] direction : directions) {
-            int newRow = coord.row() + direction[0];
-            int newCol = coord.col() + direction[1];
-
-            if (maze.isInBounds(newRow, newCol) && maze.isPassage(newRow, newCol)) {
-                neighbors.add(new Coordinate(newRow, newCol));
-            }
-        }
-
-        return neighbors;
     }
 
     // Метод для расчета эвристики (Manhattan distance)
