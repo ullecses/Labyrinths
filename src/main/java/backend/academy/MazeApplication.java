@@ -52,4 +52,3 @@ public class MazeApplication {
         mazeManager.displayMaze(maze);
     }
 }
-

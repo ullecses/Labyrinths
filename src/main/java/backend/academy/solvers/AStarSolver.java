@@ -16,6 +16,10 @@ public class AStarSolver implements Solver {
 
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
+        if (maze.getType(start) == Cell.Type.WALL || maze.getType(end) == Cell.Type.WALL) {
+            return Collections.emptyList();
+        }
+
         int[][] distances = new int[maze.getHeight()][maze.getWidth()];
         for (int[] row : distances) {
             Arrays.fill(row, Integer.MAX_VALUE); // Инициализируем все расстояния как бесконечные

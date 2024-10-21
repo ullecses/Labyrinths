@@ -36,6 +36,9 @@ public class Maze {
         return grid;
     }
 
+    public Cell[][] getGrid() {
+        return grid;
+    }
 
     public int getWidth() {
         return this.width;

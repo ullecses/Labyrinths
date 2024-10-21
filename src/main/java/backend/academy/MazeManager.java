@@ -191,7 +191,7 @@ public class MazeManager {
                 displaySymbol = "\uD83D\uDFEB";  // Символ для песка (ухудшающая поверхность)
                 break;
             case PATH:
-                displaySymbol = "\uD83D\uDD33";  // Символ для песка (ухудшающая поверхность)
+                displaySymbol = "🟪";
                 break;
             default:
                 throw new IllegalArgumentException("Unknown cell type: ");

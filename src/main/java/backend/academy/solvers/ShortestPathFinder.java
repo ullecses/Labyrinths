@@ -16,6 +16,9 @@ public class ShortestPathFinder implements Solver {
 
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
+        if (maze.getGrid()[end.getRow()][end.getCol()].getType() == Cell.Type.WALL) {
+            return Collections.emptyList(); // путь невозможен
+        }
         int[][] distances = new int[maze.getHeight()][maze.getWidth()];
         for (int[] row : distances) {
             Arrays.fill(row, Integer.MAX_VALUE); // Инициализируем все расстояния как бесконечные

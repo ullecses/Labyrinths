@@ -59,7 +59,7 @@ public class GrowingTreeMazeGenerator implements Generator {
     }
 
     // Метод для получения клетки между двумя клетками
-    private Coordinate getCellBetween(Coordinate current, Coordinate next) {
+    public Coordinate getCellBetween(Coordinate current, Coordinate next) {
         int betweenRow = (current.row() + next.row()) / 2;
         int betweenCol = (current.col() + next.col()) / 2;
         return new Coordinate(betweenRow, betweenCol);

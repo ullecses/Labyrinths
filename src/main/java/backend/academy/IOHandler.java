@@ -15,6 +15,11 @@ public class IOHandler {
         this.writer = outputStream;
     }
 
+    public IOHandler(BufferedReader reader, PrintStream outputStream) {
+        this.reader = reader;
+        this.writer = outputStream;
+    }
+
     public String readLine() throws IOException {
         return reader.readLine();
     }

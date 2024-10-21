@@ -83,11 +83,11 @@ public class KruskalMazeGenerator implements Generator {
     }
 
     // Класс для реализации структуры данных Disjoint Set (Union-Find)
-    private static class DisjointSet {
+    public static class DisjointSet {
         private final int[] parent;
         private final int[] rank;
 
-        DisjointSet(int size) {
+        public DisjointSet(int size) {
             parent = new int[size];
             rank = new int[size];
             for (int i = 0; i < size; i++) {
