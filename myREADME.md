@@ -74,7 +74,36 @@
   - `void setCellType(Coordinate coord, Cell.Type type)`: Устанавливает тип клетки по координатам.
   - `void addSurfaces()`: Добавляет поверхности к проходам в лабиринте.
   - `List<Coordinate> getUnvisitedNeighbors(Coordinate coord)`: Получает непосещенные соседние клетки.
+    
+### 6. Интерфейс: `UserInterface`
+- **Описание**: Определяет методы для взаимодействия с пользователем при выборе параметров лабиринта и отображении его состояния.
+- **Методы**:
+  - `Maze chooseMazeSize()`: Позволяет пользователю выбрать размер лабиринта.
+  - `Generator chooseMazeGenerator()`: Позволяет пользователю выбрать алгоритм генерации лабиринта.
+  - `Solver chooseSolver()`: Позволяет пользователю выбрать алгоритм поиска пути.
+  - `Coordinate getCoordinate(String prompt, Maze maze)`: Запрашивает у пользователя координаты в формате строки.
+  - `boolean askUserToAddSurfaces()`: Спрашивает у пользователя, нужно ли добавить поверхности в лабиринт.
+  - `void displayMaze(Maze maze)`: Отображает лабиринт в консоли.
+  - `String getDisplaySymbol(Cell cell)`: Возвращает символ для отображения состояния клетки в лабиринте.
 
+### 7. Класс: `MazeApplication`
+- **Описание**: Основной класс для работы с лабиринтом. Управляет логикой выбора параметров, генерации лабиринта и поиска пути.
+- **Методы**:
+  - `public MazeApplication(IOHandler ioHandler, ConsoleUserInterface consoleUserInterface)`: Конструктор, инициализирует интерфейсы ввода-вывода и взаимодействия с пользователем.
+  - `public void run()`: Выполняет основной процесс: выбор размера лабиринта, генератора, ввода координат, отображения лабиринта и поиска пути.
+
+### 8. Класс: `ConsoleUserInterface`
+- **Описание**: Реализация интерфейса `UserInterface`, предназначенная для работы через консоль. Обеспечивает выбор параметров лабиринта и отображение результатов.
+- **Поля**:
+  - `IOHandler ioHandler`: Обеспечивает взаимодействие с пользователем через консоль.
+- **Методы**:
+  - `public Maze chooseMazeSize()`: Позволяет пользователю выбрать размер лабиринта из доступных опций (маленький, средний, большой).
+  - `public Generator chooseMazeGenerator()`: Позволяет выбрать один из алгоритмов генерации лабиринта (Kruskal или Growing Tree).
+  - `public Solver chooseSolver()`: Позволяет выбрать один из алгоритмов поиска пути (ShortestPathFinder или AStarSolver).
+  - `public Coordinate getCoordinate(String prompt, Maze maze)`: Запрашивает у пользователя координаты начала и конца в формате строки.
+  - `public boolean askUserToAddSurfaces()`: Спрашивает у пользователя, нужно ли добавить поверхности (например, песок или монеты) в лабиринт.
+  - `public void displayMaze(Maze maze)`: Отображает лабиринт в консоли построчно.
+  - `public String getDisplaySymbol(Cell cell)`: Возвращает символ для клетки в зависимости от её типа (стена, проход, монета, песок, путь).
 
 ### Пакет: `backend.academy.generators`
 
