@@ -64,6 +64,7 @@ public class Maze {
         }
     }
 
+    //Метод для генерации дополнительных поверхностей
     private void assignSurface(int row, int col) {
         if (Math.random() < CONST_FOR_SAND) {
             grid[row][col].setType(Cell.Type.SAND);
@@ -104,7 +105,7 @@ public class Maze {
 
     public void markPath(List<Coordinate> path) {
         for (Coordinate coord : path) {
-            grid[coord.row()][coord.col()].setType(Cell.Type.PATH); // Закрашиваем клетки пути символом ▣
+            grid[coord.row()][coord.col()].setType(Cell.Type.PATH); // Закрашиваем клетки пути
         }
     }
 

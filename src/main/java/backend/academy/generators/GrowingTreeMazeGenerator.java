@@ -16,8 +16,6 @@ public class GrowingTreeMazeGenerator implements Generator {
 
     @Override
     public Maze generate(Maze maze, Coordinate start, Coordinate end) {
-        int height = maze.getHeight();
-        int width = maze.getWidth();
         List<Coordinate> cells = new ArrayList<>();
 
         // Добавляем стартовую ячейку

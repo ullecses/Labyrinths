@@ -12,8 +12,8 @@ public class Main {
         PrintStream printStream = System.out;
 
         IOHandler ioHandler = new IOHandler(inputStream, printStream);
-        MazeManager mazeManager = new MazeManager(ioHandler);
-        MazeApplication app = new MazeApplication(ioHandler, mazeManager);
+        ConsoleUserInterface consoleUserInterface = new ConsoleUserInterface(ioHandler);
+        MazeApplication app = new MazeApplication(ioHandler, consoleUserInterface);
 
         app.run();
     }

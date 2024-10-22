@@ -77,7 +77,7 @@ public class AStarSolver implements Solver {
         return path;
     }
 
-    // Метод для расчета эвристики (Manhattan distance)
+    // Метод для расчета эвристики
     private int heuristic(Coordinate a, Coordinate b) {
         return Math.abs(a.row() - b.row()) + Math.abs(a.col() - b.col());
     }

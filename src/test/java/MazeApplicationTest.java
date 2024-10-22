@@ -2,7 +2,7 @@ import backend.academy.Coordinate;
 import backend.academy.IOHandler;
 import backend.academy.Maze;
 import backend.academy.MazeApplication;
-import backend.academy.MazeManager;
+import backend.academy.ConsoleUserInterface;
 import backend.academy.generators.Generator;
 import backend.academy.generators.KruskalMazeGenerator;
 import backend.academy.solvers.AStarSolver;
@@ -21,15 +21,15 @@ import static org.mockito.Mockito.when;
 
 class MazeApplicationTest {
     private IOHandler ioHandler;
-    private MazeManager mazeManager;
+    private ConsoleUserInterface consoleUserInterface;
     private MazeApplication mazeApplication;
     private Solver solver;
 
     @BeforeEach
     void setUp() {
         ioHandler = mock(IOHandler.class);
-        mazeManager = mock(MazeManager.class);
-        mazeApplication = new MazeApplication(ioHandler, mazeManager);
+        consoleUserInterface = mock(ConsoleUserInterface.class);
+        mazeApplication = new MazeApplication(ioHandler, consoleUserInterface);
         solver = mock(AStarSolver.class);
     }
 
@@ -42,11 +42,11 @@ class MazeApplicationTest {
         Generator generator = new KruskalMazeGenerator();
 
         // Настройка поведения моков
-        when(mazeManager.chooseMazeSize()).thenReturn(maze);
-        when(mazeManager.getCoordinate(anyString(), eq(maze))).thenReturn(start, end);
-        when(mazeManager.chooseMazeGenerator()).thenReturn(generator);
-        when(mazeManager.askUserToAddSurfaces()).thenReturn(false);
-        when(mazeManager.chooseSolver()).thenReturn(this.solver);
+        when(consoleUserInterface.chooseMazeSize()).thenReturn(maze);
+        when(consoleUserInterface.getCoordinate(anyString(), eq(maze))).thenReturn(start, end);
+        when(consoleUserInterface.chooseMazeGenerator()).thenReturn(generator);
+        when(consoleUserInterface.askUserToAddSurfaces()).thenReturn(false);
+        when(consoleUserInterface.chooseSolver()).thenReturn(this.solver);
         when(this.solver.solve(eq(maze), eq(start), eq(end))).thenReturn(new ArrayList<>());
 
         // Act
@@ -55,7 +55,7 @@ class MazeApplicationTest {
         // Assert
         verify(ioHandler, times(1)).writeLine("Сгенерированный лабиринт:");
         verify(ioHandler, times(1)).writeLine("Найденный путь:");
-        verify(mazeManager, times(2)).displayMaze(maze);
+        verify(consoleUserInterface, times(2)).displayMaze(maze);
     }
 
     @Test
@@ -68,12 +68,12 @@ class MazeApplicationTest {
         Generator generator = new KruskalMazeGenerator();
 
         // Настройка поведения моков
-        when(mazeManager.chooseMazeSize()).thenReturn(maze);
-        when(mazeManager.getCoordinate(anyString(), eq(maze)))
+        when(consoleUserInterface.chooseMazeSize()).thenReturn(maze);
+        when(consoleUserInterface.getCoordinate(anyString(), eq(maze)))
             .thenReturn(start, end, start, secondEnd); // повторный ввод
-        when(mazeManager.chooseMazeGenerator()).thenReturn(generator);
-        when(mazeManager.askUserToAddSurfaces()).thenReturn(false);
-        when(mazeManager.chooseSolver()).thenReturn(this.solver);
+        when(consoleUserInterface.chooseMazeGenerator()).thenReturn(generator);
+        when(consoleUserInterface.askUserToAddSurfaces()).thenReturn(false);
+        when(consoleUserInterface.chooseSolver()).thenReturn(this.solver);
         when(this.solver.solve(eq(maze), eq(start), eq(end))).thenReturn(new ArrayList<>());
 
         // Act
@@ -82,7 +82,7 @@ class MazeApplicationTest {
         // Assert
         ArgumentCaptor<String> messageCaptor = ArgumentCaptor.forClass(String.class);
         verify(ioHandler, times(3)).writeLine(messageCaptor.capture());
-        verify(mazeManager, times(4)).getCoordinate(anyString(), eq(maze)); // Проверяем, что было два запроса на ввод координат
+        verify(consoleUserInterface, times(4)).getCoordinate(anyString(), eq(maze)); // Проверяем, что было два запроса на ввод координат
     }
 
     @Test
@@ -94,11 +94,11 @@ class MazeApplicationTest {
         Generator generator = new KruskalMazeGenerator();
 
         // Настройка поведения моков
-        when(mazeManager.chooseMazeSize()).thenReturn(maze);
-        when(mazeManager.getCoordinate(anyString(), eq(maze))).thenReturn(start, end);
-        when(mazeManager.chooseMazeGenerator()).thenReturn(generator);
-        when(mazeManager.askUserToAddSurfaces()).thenReturn(true); // Добавление поверхностей
-        when(mazeManager.chooseSolver()).thenReturn(this.solver);
+        when(consoleUserInterface.chooseMazeSize()).thenReturn(maze);
+        when(consoleUserInterface.getCoordinate(anyString(), eq(maze))).thenReturn(start, end);
+        when(consoleUserInterface.chooseMazeGenerator()).thenReturn(generator);
+        when(consoleUserInterface.askUserToAddSurfaces()).thenReturn(true); // Добавление поверхностей
+        when(consoleUserInterface.chooseSolver()).thenReturn(this.solver);
         when(this.solver.solve(eq(maze), eq(start), eq(end))).thenReturn(new ArrayList<>());
 
         // Act

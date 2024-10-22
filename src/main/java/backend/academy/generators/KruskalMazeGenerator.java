@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 public class KruskalMazeGenerator implements Generator {
-
     // Метод для генерации лабиринта с помощью алгоритма Краскала
     @Override
     public Maze generate(Maze maze, Coordinate start, Coordinate end) {
@@ -82,7 +81,7 @@ public class KruskalMazeGenerator implements Generator {
     private record Edge(Coordinate u, Coordinate v) {
     }
 
-    // Класс для реализации структуры данных Disjoint Set (Union-Find)
+    // Класс для реализации структуры данных Disjoint Set
     public static class DisjointSet {
         private final int[] parent;
         private final int[] rank;

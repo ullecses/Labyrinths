@@ -8,7 +8,7 @@ import backend.academy.solvers.ShortestPathFinder;
 import backend.academy.solvers.Solver;
 import java.io.IOException;
 
-public class MazeManager {
+public class ConsoleUserInterface implements UserInterface {
     public static final Coordinate SMALL_MAZE = new Coordinate(17, 31);
     public static final Coordinate MEDIUM_MAZE = new Coordinate(25, 45);
     public static final Coordinate LARGE_MAZE = new Coordinate(35, 65);
@@ -21,7 +21,7 @@ public class MazeManager {
 
     private final IOHandler ioHandler;
 
-    public MazeManager(IOHandler ioHandler) {
+    public ConsoleUserInterface(IOHandler ioHandler) {
         this.ioHandler = ioHandler;
     }
 
@@ -74,7 +74,7 @@ public class MazeManager {
 
             if (input == null || input.trim().isEmpty()) {
                 ioHandler.writeLine(INPUT_NULL);
-                continue;  // Продолжить цикл для нового ввода
+                continue;
             }
 
             int choice;
@@ -166,7 +166,6 @@ public class MazeManager {
 
     public void displayMaze(Maze maze) {
         Cell[][] grid = maze.getCellArray();
-        // Визуализация лабиринта
         for (int row = 0; row < maze.getHeight(); row++) {
             for (int col = 0; col < maze.getWidth(); col++) {
                 ioHandler.write(getDisplaySymbol(grid[row][col]));
