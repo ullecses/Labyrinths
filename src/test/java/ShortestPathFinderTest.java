@@ -13,7 +13,7 @@ public class ShortestPathFinderTest {
     @Test
     public void testSimpleMaze() {
         // Arrange
-        Maze maze = new Maze(3, 3); // Создаем лабиринт с высотой 3 и шириной 3
+        Maze maze = new Maze(3, 3);
 
         // Инициализируем клетки вручную
         maze.getGrid()[0][0] = new Cell(0, 0, Cell.Type.PASSAGE);
@@ -84,7 +84,6 @@ public class ShortestPathFinderTest {
         // Arrange
         Maze maze = new Maze(3, 3);
 
-        // Инициализируем клетки вручную
         maze.getGrid()[0][0] = new Cell(0, 0, Cell.Type.PASSAGE);
         maze.getGrid()[0][1] = new Cell(0, 1, Cell.Type.PASSAGE);
         maze.getGrid()[0][2] = new Cell(0, 2, Cell.Type.SAND);

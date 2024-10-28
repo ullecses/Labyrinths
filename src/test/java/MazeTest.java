@@ -22,7 +22,6 @@ class MazeTest {
         assertEquals(width, maze.getWidth(), "Maze width should be initialized correctly.");
         assertEquals(height, maze.getHeight(), "Maze height should be initialized correctly.");
 
-        // Assert each cell is initialized as a WALL
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
                 assertEquals(Cell.Type.WALL, maze.getCellArray()[row][col].getType(),

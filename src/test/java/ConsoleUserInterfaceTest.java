@@ -8,18 +8,13 @@ import backend.academy.generators.KruskalMazeGenerator;
 import backend.academy.solvers.AStarSolver;
 import backend.academy.solvers.ShortestPathFinder;
 import backend.academy.solvers.Solver;
-import java.io.IOException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.mockito.Mockito.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+
+import java.io.IOException;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
 
 class ConsoleUserInterfaceTest {
 
@@ -34,10 +29,13 @@ class ConsoleUserInterfaceTest {
 
     @Test
     void testChooseMazeSize_small() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("1");
 
+        // Act
         Maze maze = consoleUserInterface.chooseMazeSize();
 
+        // Assert
         assertNotNull(maze);
         assertEquals(ConsoleUserInterface.SMALL_MAZE.getRow(), maze.getHeight());
         assertEquals(ConsoleUserInterface.SMALL_MAZE.getCol(), maze.getWidth());
@@ -45,10 +43,13 @@ class ConsoleUserInterfaceTest {
 
     @Test
     void testChooseMazeSize_medium() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("2");
 
+        // Act
         Maze maze = consoleUserInterface.chooseMazeSize();
 
+        // Assert
         assertNotNull(maze);
         assertEquals(ConsoleUserInterface.MEDIUM_MAZE.getRow(), maze.getHeight());
         assertEquals(ConsoleUserInterface.MEDIUM_MAZE.getCol(), maze.getWidth());
@@ -56,10 +57,13 @@ class ConsoleUserInterfaceTest {
 
     @Test
     void testChooseMazeSize_large() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("3");
 
+        // Act
         Maze maze = consoleUserInterface.chooseMazeSize();
 
+        // Assert
         assertNotNull(maze);
         assertEquals(ConsoleUserInterface.LARGE_MAZE.getRow(), maze.getHeight());
         assertEquals(ConsoleUserInterface.LARGE_MAZE.getCol(), maze.getWidth());
@@ -67,101 +71,130 @@ class ConsoleUserInterfaceTest {
 
     @Test
     void testChooseMazeSize_invalidInput() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("invalid", "4", "1");
 
+        // Act
         Maze maze = consoleUserInterface.chooseMazeSize();
 
+        // Assert
         assertNotNull(maze);
         assertEquals(ConsoleUserInterface.SMALL_MAZE.getRow(), maze.getHeight());
         assertEquals(ConsoleUserInterface.SMALL_MAZE.getCol(), maze.getWidth());
-
-        verify(ioHandler, times(3)).writeLine(anyString()); // Проверка, что сообщение об ошибке вывелось
+        verify(ioHandler, times(3)).writeLine(anyString());
     }
 
     @Test
     void testChooseMazeGenerator_kruskal() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("1");
 
+        // Act
         Generator generator = consoleUserInterface.chooseMazeGenerator();
 
+        // Assert
         assertTrue(generator instanceof KruskalMazeGenerator);
     }
 
     @Test
     void testChooseMazeGenerator_growingTree() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("2");
 
+        // Act
         Generator generator = consoleUserInterface.chooseMazeGenerator();
 
+        // Assert
         assertTrue(generator instanceof GrowingTreeMazeGenerator);
     }
 
     @Test
     void testChooseMazeGenerator_invalidInput() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("invalid", "3", "1");
 
+        // Act
         Generator generator = consoleUserInterface.chooseMazeGenerator();
 
+        // Assert
         assertTrue(generator instanceof KruskalMazeGenerator);
-        verify(ioHandler, times(5)).writeLine(anyString()); // Проверка, что сообщение об ошибке вывелось
+        verify(ioHandler, times(5)).writeLine(anyString());
     }
 
     @Test
     void testChooseSolver_shortestPathFinder() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("1");
 
+        // Act
         Solver solver = consoleUserInterface.chooseSolver();
 
+        // Assert
         assertTrue(solver instanceof ShortestPathFinder);
     }
 
     @Test
     void testChooseSolver_aStarSolver() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("2");
 
+        // Act
         Solver solver = consoleUserInterface.chooseSolver();
 
+        // Assert
         assertTrue(solver instanceof AStarSolver);
     }
 
     @Test
     void testGetCoordinate_validInput() throws IOException {
-        Maze maze = new Maze(10, 10); // создаем лабиринт 10x10
+        // Arrange
+        Maze maze = new Maze(10, 10);
         when(ioHandler.readLine()).thenReturn("5,5");
 
+        // Act
         Coordinate coordinate = consoleUserInterface.getCoordinate("Введите координаты: ", maze);
 
-        assertEquals(4, coordinate.getRow()); // Проверка на 1-индексацию
+        // Assert
+        assertEquals(4, coordinate.getRow());
         assertEquals(4, coordinate.getCol());
     }
 
     @Test
     void testGetCoordinate_invalidInput() throws IOException {
-        Maze maze = new Maze(10, 10); // создаем лабиринт 10x10
+        // Arrange
+        Maze maze = new Maze(10, 10);
         when(ioHandler.readLine()).thenReturn("invalid", "11,11", "5,5");
 
+        // Act
         Coordinate coordinate = consoleUserInterface.getCoordinate("Введите координаты: ", maze);
 
-        assertEquals(4, coordinate.getRow()); // Проверка на 1-индексацию
+        // Assert
+        assertEquals(4, coordinate.getRow());
         assertEquals(4, coordinate.getCol());
-        verify(ioHandler, times(2)).writeLine(anyString()); // Проверка, что сообщение об ошибке вывелось
+        verify(ioHandler, times(2)).writeLine(anyString());
     }
 
     @Test
     void testAskUserToAddSurfaces_yes() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("да");
 
+        // Act
         boolean result = consoleUserInterface.askUserToAddSurfaces();
 
+        // Assert
         assertTrue(result);
     }
 
     @Test
     void testAskUserToAddSurfaces_no() throws IOException {
+        // Arrange
         when(ioHandler.readLine()).thenReturn("нет");
 
+        // Act
         boolean result = consoleUserInterface.askUserToAddSurfaces();
 
+        // Assert
         assertFalse(result);
     }
 }
