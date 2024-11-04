@@ -1,8 +1,8 @@
-import backend.academy.Coordinate;
-import backend.academy.IOHandler;
-import backend.academy.Maze;
-import backend.academy.MazeApplication;
-import backend.academy.ConsoleUserInterface;
+import backend.academy.maze.Coordinate;
+import backend.academy.interaction.IOHandler;
+import backend.academy.maze.Maze;
+import backend.academy.interaction.MazeApplication;
+import backend.academy.interaction.ConsoleUserInterface;
 import backend.academy.generators.Generator;
 import backend.academy.generators.KruskalMazeGenerator;
 import backend.academy.solvers.AStarSolver;

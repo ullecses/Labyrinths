@@ -1,4 +1,4 @@
-package backend.academy;
+package backend.academy.maze;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,7 @@ public class Maze {
         // Инициализируем все ячейки стенами
         for (int row = 0; row < height; row++) {
             for (int col = 0; col < width; col++) {
-                grid[row][col] = new Cell(row, col, Cell.Type.WALL);
+                grid[row][col] = new Cell(Cell.Type.WALL);
             }
         }
     }
@@ -112,5 +112,18 @@ public class Maze {
     // Метод для проверки, что координата находится в пределах лабиринта
     public boolean isInBounds(int row, int col) {
         return row >= 0 && row < height && col >= 0 && col < width;
+    }
+
+    public Maze crop(int targetHeight, int targetWidth) {
+        Cell[][] originalCells = this.getCellArray();
+        Cell[][] croppedCells = new Cell[targetHeight][targetWidth];
+
+        for (int row = 0; row < targetHeight; row++) {
+            for (int col = 0; col < targetWidth; col++) {
+                croppedCells[row][col] = originalCells[row][col];
+            }
+        }
+
+        return new Maze(targetHeight, targetWidth);
     }
 }

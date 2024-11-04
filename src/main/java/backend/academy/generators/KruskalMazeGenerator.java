@@ -1,8 +1,8 @@
 package backend.academy.generators;
 
-import backend.academy.Cell;
-import backend.academy.Coordinate;
-import backend.academy.Maze;
+import backend.academy.maze.Cell;
+import backend.academy.maze.Coordinate;
+import backend.academy.maze.Maze;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -68,6 +68,8 @@ public class KruskalMazeGenerator implements Generator {
         // Делаем старт и конец проходами
         maze.setCellType(start, Cell.Type.PASSAGE);
         maze.setCellType(end, Cell.Type.PASSAGE);
+
+        GeneratorUtils.addExtraPaths(maze);
 
         return maze;
     }

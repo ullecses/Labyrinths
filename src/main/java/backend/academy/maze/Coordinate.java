@@ -1,7 +1,6 @@
-package backend.academy;
+package backend.academy.maze;
 
 public record Coordinate(int row, int col) {
-
     public int getRow() {
         return row;
     }

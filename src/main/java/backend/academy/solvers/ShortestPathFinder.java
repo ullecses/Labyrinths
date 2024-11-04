@@ -1,8 +1,8 @@
 package backend.academy.solvers;
 
-import backend.academy.Cell;
-import backend.academy.Coordinate;
-import backend.academy.Maze;
+import backend.academy.maze.Cell;
+import backend.academy.maze.Coordinate;
+import backend.academy.maze.Maze;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,11 +14,16 @@ import java.util.Queue;
 
 public class ShortestPathFinder implements Solver {
 
+    private boolean isPathFound; // Флаг для обозначения, найден ли путь
+
     @Override
     public List<Coordinate> solve(Maze maze, Coordinate start, Coordinate end) {
+        isPathFound = false; // Изначально считаем, что путь не найден
+
         if (maze.getGrid()[end.getRow()][end.getCol()].getType() == Cell.Type.WALL) {
-            return Collections.emptyList(); // путь невозможен
+            return Collections.emptyList(); // Путь невозможен, так как конечная точка - стена
         }
+
         int[][] distances = new int[maze.getHeight()][maze.getWidth()];
         for (int[] row : distances) {
             Arrays.fill(row, Integer.MAX_VALUE); // Инициализируем все расстояния как бесконечные
@@ -38,8 +43,9 @@ public class ShortestPathFinder implements Solver {
             Coordinate current = queue.poll();
             int currentDistance = distances[current.row()][current.col()];
 
-            // Если мы достигли конца, останавливаемся
+            // Если мы достигли конца, отмечаем, что путь найден и останавливаемся
             if (current.equals(end)) {
+                isPathFound = true; // Устанавливаем флаг, если конечная точка достигнута
                 break;
             }
 
@@ -55,6 +61,11 @@ public class ShortestPathFinder implements Solver {
             }
         }
 
+        // Если путь не найден, возвращаем пустой список
+        if (!isPathFound) {
+            return Collections.emptyList();
+        }
+
         // Собираем кратчайший путь, начиная с конца
         List<Coordinate> path = new ArrayList<>();
         Coordinate step = end;
@@ -67,6 +78,11 @@ public class ShortestPathFinder implements Solver {
         Collections.reverse(path); // Разворачиваем путь, так как мы шли от конца
 
         return path; // Возвращаем список клеток, образующих кратчайший путь
+    }
+
+    @Override
+    public boolean isPathFound() {
+        return isPathFound;
     }
 
     private int getCellCost(Maze maze, Coordinate coord) {

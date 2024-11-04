@@ -1,5 +1,8 @@
 package backend.academy;
 
+import backend.academy.interaction.ConsoleUserInterface;
+import backend.academy.interaction.IOHandler;
+import backend.academy.interaction.MazeApplication;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;

@@ -1,6 +1,6 @@
-import backend.academy.Cell;
-import backend.academy.Coordinate;
-import backend.academy.Maze;
+import backend.academy.maze.Cell;
+import backend.academy.maze.Coordinate;
+import backend.academy.maze.Maze;
 import java.util.List;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;

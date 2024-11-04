@@ -1,5 +1,5 @@
-import backend.academy.Cell;
-import backend.academy.Cell.Type;
+import backend.academy.maze.Cell;
+import backend.academy.maze.Cell.Type;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -15,7 +15,7 @@ class CellTest {
         Type type = Type.PASSAGE;
 
         // Act
-        Cell cell = new Cell(row, col, type);
+        Cell cell = new Cell(type);
 
         // Assert
         assertEquals(Type.PASSAGE, cell.getType(), "Cell type should be PASSAGE after initialization");
@@ -24,7 +24,7 @@ class CellTest {
     @Test
     void testSetType() {
         // Arrange
-        Cell cell = new Cell(1, 2, Type.PASSAGE);
+        Cell cell = new Cell(Type.PASSAGE);
         Type newType = Type.WALL;
 
         // Act
@@ -37,7 +37,7 @@ class CellTest {
     @Test
     void testIsPassageTrue() {
         // Arrange
-        Cell cell = new Cell(1, 2, Type.PASSAGE);
+        Cell cell = new Cell(Type.PASSAGE);
 
         // Act
         boolean result = cell.isPassage();
@@ -49,7 +49,7 @@ class CellTest {
     @Test
     void testIsPassageFalse() {
         // Arrange
-        Cell cell = new Cell(1, 2, Type.WALL);
+        Cell cell = new Cell(Type.WALL);
 
         // Act
         boolean result = cell.isPassage();
@@ -66,7 +66,7 @@ class CellTest {
         Type type = Type.SAND;
 
         // Act
-        Cell cell = new Cell(row, col, type);
+        Cell cell = new Cell(type);
 
         // Assert
         assertEquals(Type.SAND, cell.getType(), "Cell type should be SAND");
@@ -80,7 +80,7 @@ class CellTest {
         Type type = Type.COIN;
 
         // Act
-        Cell cell = new Cell(row, col, type);
+        Cell cell = new Cell(type);
 
         // Assert
         assertEquals(Type.COIN, cell.getType(), "Cell type should be COIN");
@@ -94,7 +94,7 @@ class CellTest {
         Type type = Type.PATH;
 
         // Act
-        Cell cell = new Cell(row, col, type);
+        Cell cell = new Cell(type);
 
         // Assert
         assertEquals(Type.PATH, cell.getType(), "Cell type should be PATH");

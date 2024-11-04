@@ -1,4 +1,4 @@
-package backend.academy;
+package backend.academy.interaction;
 
 import java.io.BufferedReader;
 import java.io.IOException;

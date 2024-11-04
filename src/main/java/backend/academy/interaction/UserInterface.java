@@ -1,6 +1,8 @@
-package backend.academy;
+package backend.academy.interaction;
 
 import backend.academy.generators.Generator;
+import backend.academy.maze.Coordinate;
+import backend.academy.maze.Maze;
 import backend.academy.solvers.Solver;
 import java.io.IOException;
 
@@ -17,6 +19,4 @@ public interface UserInterface {
     boolean askUserToAddSurfaces() throws IOException;
 
     void displayMaze(Maze maze);
-
-    String getDisplaySymbol(Cell cell);
 }

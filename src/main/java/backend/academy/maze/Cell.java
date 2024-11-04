@@ -1,14 +1,18 @@
-package backend.academy;
+package backend.academy.maze;
+
+import java.util.Map;
 
 public class Cell {
-    private final int row;
-    private final int col;
+    private static final Map<Type, String> SYMBOL_MAP = Map.of(
+        Cell.Type.WALL, "⬜",
+        Cell.Type.PASSAGE, "⬛️",
+        Cell.Type.COIN, "\uD83D\uDFE1",
+        Cell.Type.SAND, "\uD83D\uDFEB",
+        Cell.Type.PATH, "🟪"
+    );
     private Type type;
-    private String displaySymbol;
 
-    public Cell(int row, int col, Type type) {
-        this.row = row;
-        this.col = col;
+    public Cell(Type type) {
         this.type = type;
     }
 
@@ -30,5 +34,9 @@ public class Cell {
 
     public boolean isPassage() {
         return this.type != Type.WALL;
+    }
+
+    public String getSymbol() {
+        return SYMBOL_MAP.getOrDefault(type, "?"); // Везвращаем "?" для неизвестного типа
     }
 }

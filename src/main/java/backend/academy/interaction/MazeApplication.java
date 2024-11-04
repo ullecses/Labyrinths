@@ -1,6 +1,8 @@
-package backend.academy;
+package backend.academy.interaction;
 
 import backend.academy.generators.Generator;
+import backend.academy.maze.Coordinate;
+import backend.academy.maze.Maze;
 import backend.academy.solvers.Solver;
 import java.io.IOException;
 import java.util.List;
@@ -19,14 +21,17 @@ public class MazeApplication {
         Maze maze = consoleUserInterface.chooseMazeSize();
 
         // Шаг 2: Ввод координат
-        Coordinate start = consoleUserInterface.getCoordinate("Введите координаты начала (формат: row,col): ", maze);
-        Coordinate end = consoleUserInterface.getCoordinate("Введите координаты конца (формат: row,col): ", maze);
+        Coordinate start;
+        Coordinate end;
 
-        while (start.equals(end)) {
-            ioHandler.writeLine("Начальная и конечная точки не должны совпадать. Повторите ввод.");
-            start = consoleUserInterface.getCoordinate("Введите координаты начала: ", maze);
-            end = consoleUserInterface.getCoordinate("Введите координаты конца: ", maze);
-        }
+        do {
+            start = consoleUserInterface.getCoordinate("Введите координаты начала (формат: row,col): ", maze);
+            end = consoleUserInterface.getCoordinate("Введите координаты конца (формат: row,col): ", maze);
+
+            if (start.equals(end)) {
+                ioHandler.writeLine("Начальная и конечная точки не должны совпадать. Повторите ввод.");
+            }
+        } while (start.equals(end));
 
         // Шаг 3: Выбор генератора лабиринта
         Generator generator = consoleUserInterface.chooseMazeGenerator();
@@ -47,8 +52,12 @@ public class MazeApplication {
         List<Coordinate> path = solver.solve(maze, start, end);
 
         // Показать результат
-        ioHandler.writeLine("Найденный путь:");
-        maze.markPath(path);
-        consoleUserInterface.displayMaze(maze);
+        if (solver.isPathFound()) {
+            ioHandler.writeLine("Найденный путь:");
+            maze.markPath(path);
+            consoleUserInterface.displayMaze(maze);
+        } else {
+            ioHandler.writeLine("Пути нет");
+        }
     }
 }

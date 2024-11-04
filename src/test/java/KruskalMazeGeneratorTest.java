@@ -1,6 +1,6 @@
-import backend.academy.Cell;
-import backend.academy.Coordinate;
-import backend.academy.Maze;
+import backend.academy.maze.Cell;
+import backend.academy.maze.Coordinate;
+import backend.academy.maze.Maze;
 import backend.academy.generators.KruskalMazeGenerator;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
